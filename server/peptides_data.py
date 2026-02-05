@@ -1,0 +1,537 @@
+from typing import List
+
+from pydantic import PositiveFloat
+
+from models import Peptide
+
+
+def load_peptides() -> List[Peptide]:
+    return [
+        Peptide(
+            id="bpc-157",
+            name="BPC-157",
+            aka=["Body Protection Compound"],
+            category="Protective peptide",
+            vial_amount_mg=PositiveFloat(5.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C and protect from light.",
+        stability_refrigerated_days=20,
+        notes=[
+            "Common research dose ranges 250-500 mcg per administration.",
+            "Use insulin syringes for subcutaneous research to improve volume accuracy.",
+        ],
+        benefits=[
+            "Tissue protection and gut mucosa support in preclinical models",
+            "May aid soft-tissue recovery in research settings",
+        ],
+        side_effects=[
+            "Transient injection site irritation",
+            "Limited human data; monitor for unexpected reactions",
+        ],
+    ),
+    Peptide(
+        id="tb-500",
+        name="TB-500",
+        aka=["Thymosin Beta-4"],
+        category="Regenerative peptide",
+            vial_amount_mg=PositiveFloat(5.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C; avoid repeated freeze-thaw.",
+        stability_refrigerated_days=14,
+        notes=[
+            "Research ranges often 2-5 mg per week split into multiple administrations.",
+            "Some researchers rotate injection sites to reduce irritation.",
+        ],
+        benefits=[
+            "May support angiogenesis and soft-tissue healing in animal studies",
+            "Potential mobility support post-exercise in research contexts",
+        ],
+        side_effects=[
+            "Injection site redness",
+            "Possible lethargy or headache reported anecdotally",
+        ],
+    ),
+    Peptide(
+        id="ipamorelin",
+        name="Ipamorelin",
+        aka=[],
+            category="GHRP",
+            vial_amount_mg=PositiveFloat(2.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C.",
+        stability_refrigerated_days=10,
+        notes=[
+            "Often researched in the 100-300 mcg range per administration.",
+            "Researchers avoid mixing with alcohol-based diluents to protect peptide integrity.",
+        ],
+        benefits=[
+            "Selective GH pulse stimulation with low effect on prolactin and cortisol",
+            "Often explored for lean mass and recovery support in research",
+        ],
+        side_effects=[
+            "Transient hunger or lightheadedness after administration",
+            "Rare flushing or tingling",
+        ],
+    ),
+    Peptide(
+        id="cjc-1295-no-dac",
+        name="CJC-1295 (no DAC)",
+        aka=["MOD-GRF 1-29"],
+            category="GHRH analog",
+            vial_amount_mg=PositiveFloat(2.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C.",
+        stability_refrigerated_days=10,
+        notes=[
+            "Often paired with a GHRP like Ipamorelin in research protocols.",
+            "Shorter half-life compared to DAC version; some divide daily administrations.",
+        ],
+        benefits=[
+            "Short-acting GHRH analog for physiologic GH pulses",
+            "Commonly combined with GHRPs in studies",
+        ],
+        side_effects=[
+            "Flushing or warmth",
+            "Potential water retention at higher research doses",
+        ],
+    ),
+    Peptide(
+        id="cjc-1295-dac",
+        name="CJC-1295 (with DAC)",
+        aka=["CJC-1295 DAC"],
+            category="GHRH analog",
+            vial_amount_mg=PositiveFloat(2.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C.",
+        stability_refrigerated_days=14,
+        notes=[
+            "Longer half-life due to DAC; research dosing commonly 1-2 mg weekly.",
+            "Roll vial gently after adding diluent to reduce foaming.",
+        ],
+        benefits=[
+            "Sustained GH/IGF-1 elevation in research models",
+            "Lower injection frequency than no-DAC variant",
+        ],
+        side_effects=[
+            "Possible water retention and joint stiffness",
+            "Flushing or injection site irritation",
+        ],
+    ),
+    Peptide(
+        id="sermorelin",
+        name="Sermorelin",
+        aka=[],
+            category="GHRH analog",
+            vial_amount_mg=PositiveFloat(2.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C.",
+        stability_refrigerated_days=10,
+        notes=[
+            "Research ranges often 200-500 mcg per administration.",
+            "Some researchers administer pre-bed to align with natural GH pulses.",
+        ],
+        benefits=[
+            "Stimulates endogenous GH release in a pulsatile manner",
+            "Short half-life allows timing with circadian GH peaks",
+        ],
+        side_effects=[
+            "Flushing or transient headache",
+            "Injection site redness",
+        ],
+    ),
+    Peptide(
+        id="ghrp-2",
+        name="GHRP-2",
+        aka=[],
+            category="GHRP",
+            vial_amount_mg=PositiveFloat(5.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C.",
+        stability_refrigerated_days=10,
+        notes=[
+            "Research doses often 100-300 mcg per administration.",
+            "May cause transient hunger; plan timing accordingly in research settings.",
+        ],
+        benefits=[
+            "Robust GH pulse with relatively predictable profile",
+            "Often used to study appetite and GH dynamics",
+        ],
+        side_effects=[
+            "Hunger surge",
+            "Possible water retention and numbness/tingling",
+        ],
+    ),
+    Peptide(
+        id="ghrp-6",
+        name="GHRP-6",
+        aka=[],
+            category="GHRP",
+            vial_amount_mg=PositiveFloat(5.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C.",
+        stability_refrigerated_days=10,
+        notes=[
+            "Research doses often 100-300 mcg per administration.",
+            "Known to increase appetite; researchers monitor caloric intake effects.",
+        ],
+        benefits=[
+            "Strong GH pulse and appetite stimulation (ghrelin mimetic)",
+            "Studied for gastric motility and metabolic effects",
+        ],
+        side_effects=[
+            "Marked hunger and stomach rumbling",
+            "Possible water retention and flushing",
+        ],
+    ),
+    Peptide(
+        id="hexarelin",
+        name="Hexarelin",
+        aka=[],
+            category="GHRP",
+            vial_amount_mg=PositiveFloat(2.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C.",
+        stability_refrigerated_days=10,
+        notes=[
+            "Researchers often limit cycle length to reduce tachyphylaxis.",
+            "Use gentle swirling to mix; avoid vigorous shaking.",
+        ],
+        benefits=[
+            "Potent GH pulse; longer half-life than some GHRPs",
+            "Used to study cardiac and metabolic endpoints",
+        ],
+        side_effects=[
+            "Possible cortisol/prolactin elevation at higher doses",
+            "Joint stiffness or water retention",
+        ],
+    ),
+    Peptide(
+        id="aod-9604",
+        name="AOD-9604",
+        aka=["Advanced Obesity Drug fragment"],
+            category="Fragment peptide",
+            vial_amount_mg=PositiveFloat(5.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C.",
+        stability_refrigerated_days=14,
+        notes=[
+            "Often researched at 250-500 mcg per administration.",
+            "Researchers avoid freezing reconstituted solutions to maintain integrity.",
+        ],
+        benefits=[
+            "Investigated for lipolysis signaling without GH effects",
+            "Fragment of hGH focusing on fat metabolism pathways",
+        ],
+        side_effects=[
+            "Nausea or headache in some reports",
+            "Limited human safety data; monitor carefully",
+        ],
+    ),
+    Peptide(
+        id="melanotan-2",
+        name="Melanotan II",
+        aka=["MT-2"],
+            category="Melanocortin analog",
+            vial_amount_mg=PositiveFloat(10.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C and protect from light.",
+        stability_refrigerated_days=30,
+        notes=[
+            "Test spots for skin reaction before broader application.",
+            "Researchers minimize light exposure post-reconstitution to reduce degradation.",
+        ],
+        benefits=[
+            "Potent melanocortin agonist; studied for pigmentation",
+            "May influence libido and appetite in research",
+        ],
+        side_effects=[
+            "Flushing, nausea, darkening of existing moles/freckles",
+            "Possible increased blood pressure transiently",
+        ],
+    ),
+    Peptide(
+        id="pt-141",
+        name="PT-141",
+        aka=["Bremelanotide"],
+            category="Melanocortin analog",
+            vial_amount_mg=PositiveFloat(10.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C.",
+        stability_refrigerated_days=30,
+        notes=[
+            "Research doses often 1-2 mg per administration.",
+            "Some researchers report flushing; observe and document responses.",
+        ],
+        benefits=[
+            "Melanocortin agonist investigated for libido and arousal",
+            "Non-NO pathway; distinct from PDE5 mechanisms",
+        ],
+        side_effects=[
+            "Nausea, flushing, headache",
+            "Transient blood pressure increases reported clinically",
+        ],
+    ),
+    Peptide(
+        id="kpv",
+        name="KPV",
+        aka=["Lys-Pro-Val"],
+            category="Anti-inflammatory peptide",
+            vial_amount_mg=PositiveFloat(5.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C.",
+        stability_refrigerated_days=14,
+        notes=[
+            "Small tri-peptide; handle gently to avoid adsorption losses.",
+            "Often researched for topical or systemic anti-inflammatory properties.",
+        ],
+        benefits=[
+            "Alpha-MSH fragment studied for anti-inflammatory properties",
+            "Potential gut barrier support in preclinical work",
+        ],
+        side_effects=[
+            "Minimal reported; monitor for hypersensitivity",
+        ],
+    ),
+    Peptide(
+        id="selank",
+        name="Selank",
+            aka=[],
+            category="Peptide analog",
+            vial_amount_mg=PositiveFloat(10.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C.",
+        stability_refrigerated_days=14,
+        notes=[
+            "Some researchers use intranasal routes; sterile technique still applies.",
+            "Avoid repeated freeze-thaw of reconstituted solution.",
+        ],
+        benefits=[
+            "Heptapeptide studied for anxiolytic and cognitive effects",
+            "May modulate BDNF expression in models",
+        ],
+        side_effects=[
+            "Nasal irritation if used intranasally",
+            "Rare headache or fatigue",
+        ],
+    ),
+    Peptide(
+        id="semax",
+        name="Semax",
+            aka=[],
+            category="Peptide analog",
+            vial_amount_mg=PositiveFloat(10.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C.",
+        stability_refrigerated_days=14,
+        notes=[
+            "Intranasal research is common; use sterile atomizers if applicable.",
+            "Protect from light after mixing to reduce oxidation.",
+        ],
+        benefits=[
+            "ACTH(4-10) analog studied for neuroprotective effects",
+            "May support focus and working memory in research",
+        ],
+        side_effects=[
+            "Nasal dryness or irritation",
+            "Occasional headache or anxiety in some reports",
+        ],
+    ),
+    Peptide(
+        id="dsip",
+        name="DSIP",
+            aka=["Delta Sleep-Inducing Peptide"],
+            category="Neuropeptide",
+            vial_amount_mg=PositiveFloat(5.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C.",
+        stability_refrigerated_days=10,
+        notes=[
+            "Research doses often 100-300 mcg per administration.",
+            "Document sleep/wake timing when studying effects.",
+        ],
+        benefits=[
+            "Studied for modulation of sleep architecture",
+            "May influence stress-response markers in models",
+        ],
+        side_effects=[
+            "Drowsiness or vivid dreams",
+            "Headache in some reports",
+        ],
+    ),
+    Peptide(
+        id="follistatin-344",
+        name="Follistatin 344",
+            aka=[],
+            category="Binding protein fragment",
+            vial_amount_mg=PositiveFloat(1.0),
+            typical_diluent_ml=PositiveFloat(1.0),
+        storage="Store lyophilized at -20°C long term; 2-8°C short term; reconstituted 2-8°C.",
+        stability_refrigerated_days=7,
+        notes=[
+            "Handle gently; avoid foaming to protect tertiary structure.",
+            "Label with short discard date; stability after mixing is limited.",
+        ],
+        benefits=[
+            "Myostatin-binding properties studied for muscle accrual",
+            "Potential regenerative applications in preclinical data",
+        ],
+        side_effects=[
+            "Limited human data; monitor liver/kidney markers in research",
+            "Injection site irritation",
+        ],
+    ),
+    Peptide(
+        id="peg-mgf",
+        name="PEG-MGF",
+            aka=["PEGylated Mechano Growth Factor"],
+            category="IGF variant",
+            vial_amount_mg=PositiveFloat(2.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C.",
+        stability_refrigerated_days=14,
+        notes=[
+            "Often researched post-resistance exercise; timing is noted in logs.",
+            "PEGylation extends half-life; dose frequency may be lower than MGF.",
+        ],
+        benefits=[
+            "IGF variant researched for muscle repair signaling",
+            "PEGylation prolongs exposure for convenience in studies",
+        ],
+        side_effects=[
+            "Potential hypoglycemia-like symptoms; monitor glucose",
+            "Water retention possible",
+        ],
+    ),
+    Peptide(
+        id="igf-1-lr3",
+        name="IGF-1 LR3",
+            aka=["Long R3 IGF-1"],
+            category="IGF analog",
+            vial_amount_mg=PositiveFloat(1.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at -20°C long term; 2-8°C short term; reconstituted 2-8°C.",
+        stability_refrigerated_days=14,
+        notes=[
+            "Researchers often use acetic acid or bacteriostatic water; follow supplier guidance.",
+            "Track glucose levels in research where relevant due to insulin-like activity.",
+        ],
+        benefits=[
+            "Extended-acting IGF-1 analog studied for hypertrophy and repair",
+            "Reduced binding to IGFBPs increases bioavailability",
+        ],
+        side_effects=[
+            "Hypoglycemia risk; monitor glucose in research",
+            "Injection site irritation",
+        ],
+    ),
+    Peptide(
+        id="mots-c",
+        name="MOTS-c",
+            aka=[],
+            category="Mitochondrial peptide",
+            vial_amount_mg=PositiveFloat(10.0),
+            typical_diluent_ml=PositiveFloat(5.0),
+        storage="Store lyophilized at -20°C long term; 2-8°C short term; reconstituted 2-8°C.",
+        stability_refrigerated_days=14,
+        notes=[
+            "Research doses vary; log timing relative to meals and exercise.",
+            "Avoid repeated freeze-thaw; aliquot if needed.",
+        ],
+        benefits=[
+            "Mitochondrial-derived peptide studied for metabolic regulation",
+            "May influence exercise tolerance in preclinical work",
+        ],
+        side_effects=[
+            "Transient fatigue or nausea reported anecdotally",
+            "Limited human safety data",
+        ],
+    ),
+    Peptide(
+        id="aod-derivative-hc",
+        name="AOD-9604 (high concentration)",
+            aka=["AOD-9604 HC"],
+            category="Fragment peptide",
+            vial_amount_mg=PositiveFloat(10.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C.",
+        stability_refrigerated_days=14,
+        notes=[
+            "Higher-mass vial for extended study durations.",
+            "Calculate concentration carefully; label vials with mg/mL post-reconstitution.",
+        ],
+        benefits=[
+            "Same fragment mechanism as AOD-9604 with higher total mass per vial",
+            "Useful for longer study durations without reordering",
+        ],
+        side_effects=[
+            "Nausea or headache in some reports",
+            "Limited clinical safety data; monitor closely",
+        ],
+    ),
+    Peptide(
+        id="semaglutide",
+        name="Semaglutide",
+        aka=["GLP-1 analog"],
+        category="Metabolic peptide",
+        vial_amount_mg=PositiveFloat(5.0),
+        typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; protect from light. Reconstituted: 2-8°C.",
+        stability_refrigerated_days=30,
+        notes=[
+            "Research often tracks glucose, appetite, and nausea; titrate slowly in study protocols.",
+            "Roll vial gently after diluent to avoid foaming; label with concentration and date.",
+        ],
+        benefits=[
+            "GLP-1 analog studied for glycemic control and appetite modulation",
+            "Long half-life enables once-weekly research dosing paradigms",
+        ],
+        side_effects=[
+            "Nausea, vomiting, or diarrhea—especially during titration",
+            "Risk of hypoglycemia when combined with other glucose-lowering agents",
+        ],
+    ),
+    Peptide(
+        id="tirzepatide",
+        name="Tirzepatide",
+        aka=["Dual GIP/GLP-1"],
+        category="Metabolic peptide",
+        vial_amount_mg=PositiveFloat(10.0),
+        typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; reconstituted solution 2-8°C.",
+        stability_refrigerated_days=28,
+        notes=[
+            "Dual agonist; researchers monitor GI effects and glucose closely.",
+            "Dose escalations in studies are typically gradual to improve tolerability.",
+        ],
+        benefits=[
+            "Dual GIP/GLP-1 agonist studied for weight and glycemic control",
+            "May improve insulin sensitivity markers in research",
+        ],
+        side_effects=[
+            "GI effects (nausea, diarrhea, constipation) common during titration",
+            "Potential hypoglycemia when combined with insulin/secretagogues",
+        ],
+    ),
+    Peptide(
+        id="retatrutide",
+        name="Retatrutide",
+        aka=["Triple agonist", "GIP/GLP-1/GCGR"],
+        category="Metabolic peptide",
+        vial_amount_mg=PositiveFloat(5.0),
+        typical_diluent_ml=PositiveFloat(2.0),
+        storage="Store lyophilized at 2-8°C; protect from light; reconstituted 2-8°C.",
+        stability_refrigerated_days=14,
+        notes=[
+            "Emerging research compound; human data are limited—document all observations carefully.",
+            "Start with very small research doses and gradual titration; monitor glucose and GI responses.",
+        ],
+        benefits=[
+            "Triple agonist (GIP/GLP-1/GCGR) under investigation for weight and metabolic outcomes",
+            "Early data suggest potent appetite and glycemic effects",
+        ],
+        side_effects=[
+            "GI upset, nausea, diarrhea possible especially early in titration",
+            "Potential hypoglycemia when combined with other glucose-lowering agents",
+        ],
+    ),
+]

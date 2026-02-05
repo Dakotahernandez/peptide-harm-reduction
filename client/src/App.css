@@ -110,7 +110,12 @@ h3 {
 .grid {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 20px;
+  grid-template-areas:
+    "list calc"
+    "list callouts";
+  column-gap: 20px;
+  row-gap: 12px;
+  align-items: start;
 }
 
 .panel {
@@ -121,6 +126,10 @@ h3 {
   box-shadow: var(--shadow);
   backdrop-filter: blur(6px);
 }
+
+.panel.directory { grid-area: list; }
+.panel.calculator { grid-area: calc; }
+.panel.callouts { grid-area: callouts; }
 
 .panel-head {
   display: flex;
@@ -190,6 +199,26 @@ dt {
 .notes {
   margin: 10px 0 0;
   padding-left: 18px;
+  color: var(--muted);
+}
+
+.tag-block {
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--panel-border);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.tag-block.caution {
+  border-color: rgba(255, 107, 107, 0.4);
+  background: rgba(255, 107, 107, 0.05);
+}
+
+.tag-list {
+  list-style: disc;
+  padding-left: 18px;
+  margin: 6px 0 0;
   color: var(--muted);
 }
 
@@ -270,6 +299,94 @@ dt {
   margin: 0;
 }
 
+.syringe-visual {
+  grid-column: 1 / -1;
+  margin-top: 6px;
+}
+
+.syringe-svg {
+  width: 100%;
+  max-width: 480px;
+}
+
+.syringe-barrel {
+  fill: rgba(255, 255, 255, 0.03);
+  stroke: var(--panel-border);
+  stroke-width: 1.2;
+}
+
+.syringe-fill-rect {
+  fill: url(#syringe-fill-grad);
+}
+
+.syringe-plunger {
+  fill: rgba(255, 255, 255, 0.08);
+  stroke: var(--panel-border);
+  stroke-width: 1.2;
+}
+
+.syringe-stopper {
+  fill: rgba(255, 255, 255, 0.2);
+  stroke: var(--panel-border);
+  stroke-width: 1;
+}
+
+.syringe-rod {
+  fill: rgba(255, 255, 255, 0.12);
+  stroke: var(--panel-border);
+  stroke-width: 1.1;
+}
+
+.syringe-thumb {
+  fill: rgba(255, 255, 255, 0.14);
+  stroke: var(--panel-border);
+  stroke-width: 1.2;
+}
+
+.syringe-needle {
+  stroke: rgba(125, 216, 255, 0.85);
+  stroke-width: 2;
+}
+
+.syringe-hub {
+  fill: rgba(125, 216, 255, 0.2);
+  stroke: var(--panel-border);
+  stroke-width: 1.2;
+}
+
+.syringe-tick {
+  stroke: rgba(255, 255, 255, 0.7);
+  stroke-width: 1.2;
+}
+
+.syringe-tick-label {
+  fill: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.syringe-marker-arrow {
+  fill: var(--accent);
+}
+
+.syringe-marker-label {
+  fill: var(--text);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.syringe-marker-bubble {
+  fill: var(--accent);
+}
+
+.syringe-svg text {
+  dominant-baseline: middle;
+}
+
+.syringe-anim {
+  transition: none;
+}
+
 .callouts ul {
   margin: 8px 0 0;
   padding-left: 18px;
@@ -278,6 +395,48 @@ dt {
 
 .callouts strong {
   color: var(--text);
+}
+
+.guide-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--panel-border);
+  color: var(--text);
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.guide-flyout {
+  margin-top: 12px;
+}
+
+.guide-card {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.recon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.tight {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  color: var(--muted);
+}
+
+.tight li {
+  margin-bottom: 4px;
+}
+
+.tight.red {
+  color: #ff9b9b;
 }
 
 @media (max-width: 960px) {
