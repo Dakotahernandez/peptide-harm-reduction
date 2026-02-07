@@ -1,9 +1,51 @@
+import os
 from fastapi import FastAPI, Query, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field, PositiveFloat
 from typing import List, Optional, Literal
+from starlette.middleware.trustedhost import TrustedHostMiddleware
+from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 
 from models import Peptide
+
+
+def parse_csv_env(name: str, defaults: List[str]) -> List[str]:
+    raw = os.getenv(name, "")
+    if not raw.strip():
+        return defaults
+    parsed = [item.strip() for item in raw.split(",")]
+    return [item for item in parsed if item]
+
+
+def parse_bool_env(name: str, default: bool) -> bool:
+    raw = os.getenv(name)
+    if raw is None:
+        return default
+    return raw.strip().lower() in {"1", "true", "yes", "on"}
+
+
+DEFAULT_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "http://localhost:4173",
+    "http://127.0.0.1:4173",
+    "https://reconstitutionsafety.com",
+    "https://www.reconstitutionsafety.com",
+]
+DEFAULT_ALLOWED_HOSTS = [
+    "testserver",
+    "localhost",
+    "127.0.0.1",
+    "reconstitutionsafety.com",
+    "www.reconstitutionsafety.com",
+    "api.reconstitutionsafety.com",
+]
+DEFAULT_PROXY_TRUSTED_HOSTS = ["127.0.0.1"]
+
+ALLOWED_ORIGINS = parse_csv_env("ALLOWED_ORIGINS", DEFAULT_ALLOWED_ORIGINS)
+ALLOWED_HOSTS = parse_csv_env("ALLOWED_HOSTS", DEFAULT_ALLOWED_HOSTS)
+PROXY_TRUSTED_HOSTS = parse_csv_env("PROXY_TRUSTED_HOSTS", DEFAULT_PROXY_TRUSTED_HOSTS)
+ENABLE_PROXY_HEADERS = parse_bool_env("ENABLE_PROXY_HEADERS", True)
 
 app = FastAPI(
     title="Peptide Harm Reduction API",
@@ -14,13 +56,29 @@ app = FastAPI(
     version="0.1.0",
 )
 
+if ENABLE_PROXY_HEADERS:
+    app.add_middleware(ProxyHeadersMiddleware, trusted_hosts=PROXY_TRUSTED_HOSTS)
+
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=ALLOWED_HOSTS)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.middleware("http")
+async def add_security_headers(request, call_next):
+    response = await call_next(request)
+    response.headers.setdefault("X-Content-Type-Options", "nosniff")
+    response.headers.setdefault("X-Frame-Options", "DENY")
+    response.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
+    if request.url.scheme == "https":
+        response.headers.setdefault("Strict-Transport-Security", "max-age=31536000; includeSubDomains")
+    return response
 
 
 Unit = Literal["mg", "mcg", "ug", "µg"]
@@ -75,8 +133,8 @@ def calculate_dose(payload: CalculationRequest):
     concentration = vial_mg / payload.diluent_ml  # mg per mL
     dose_volume = desired_mg / concentration
     note = (
-        "Always label vials with concentration and preparation date. Use sterile technique and discard "
-        "solutions that appear cloudy or have particles."
+        "Always label vials with concentration. Use sterile technique and discard solutions that appear cloudy "
+        "or have particles."
     )
     return CalculationResponse(
         concentration_mg_per_ml=round(concentration, 4),
@@ -87,6 +145,14 @@ def calculate_dose(payload: CalculationRequest):
 
 @app.get("/disclaimer")
 def disclaimer():
+    legal_footer = [
+        "This site and its calculators are provided for educational and harm-reduction purposes only. They are not medical advice, diagnosis, or treatment.",
+        "No clinician-patient relationship is created. Consult a licensed clinician for personalized guidance.",
+        "If you think you may be experiencing a medical emergency, call 911 (US) or your local emergency number.",
+        "Information may be incomplete or incorrect and can change over time. You are responsible for verifying units, concentration, sterility, and legality before acting.",
+        "External links and citations are provided for reference only. The operators do not control or endorse third-party content.",
+        "The site is provided 'as-is' without warranties. To the maximum extent permitted by law, the operators disclaim liability for any injury, loss, or damages arising from use of this site.",
+    ]
     return {
         "title": "Educational Use Only",
         "body": (
@@ -94,7 +160,7 @@ def disclaimer():
             "It is not medical advice, does not endorse use, and is intended for harm reduction. "
             "Consult a qualified professional for any medical questions."
         ),
-        "updated": "2026-02-05",
+        "legal_footer": legal_footer,
     }
 
 
@@ -106,4 +172,9 @@ def healthcheck():
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run(
+        "main:app",
+        host=os.getenv("HOST", "0.0.0.0"),
+        port=int(os.getenv("PORT", "8000")),
+        reload=parse_bool_env("UVICORN_RELOAD", True),
+    )
