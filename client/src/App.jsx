@@ -357,17 +357,17 @@ export default function App() {
     const warnings = [];
 
     if (calcResult.dose_volume_ml < 0.03) {
-      warnings.push('Very small volume (< 0.03 mL / 3 units): measurement error risk is high.');
+      warnings.push('Volume < 0.03 mL (3 units): high measurement uncertainty at this scale.');
     }
     if (calcResult.dose_volume_ml < 0.01) {
-      warnings.push('Ultra-low volume (< 0.01 mL / 1 unit): consider a more dilute mix.');
+      warnings.push('Volume < 0.01 mL (1 unit): increase diluent volume to reduce per-unit concentration.');
     }
     if (calcResult.dose_volume_ml > selectedSyringeProfile.max_ml) {
       warnings.push(
         `Dose exceeds selected syringe capacity (${selectedSyringeProfile.max_ml} mL / ${selectedSyringeProfile.max_units} units). Split dose or select a larger syringe.`,
       );
     } else if (calcResult.dose_volume_ml >= selectedSyringeProfile.max_ml * 0.9) {
-      warnings.push('Dose is near max syringe capacity; accuracy may drop at end-range.');
+      warnings.push('Dose volume ≥ 90% of syringe capacity: reduced measurement accuracy at end-range.');
     }
 
     return warnings;
@@ -745,7 +745,7 @@ export default function App() {
                   <strong>{formatNumber(calcResult.concentration_mg_per_ml, 4)} mg/mL</strong>
                 </div>
                 <div>
-                  <p className="eyebrow">Pull this volume</p>
+                  <p className="eyebrow">Dose volume</p>
                   <strong>{formatNumber(calcResult.dose_volume_ml, 4)} mL</strong>
                 </div>
                 <div>

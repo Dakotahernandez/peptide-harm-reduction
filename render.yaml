@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: peptide-api
+    runtime: python
+    rootDir: server
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.0"
+      - key: ALLOWED_ORIGINS
+        value: "https://reconstitutionsafety.com,https://www.reconstitutionsafety.com,https://peptide-harm-reduction-1b0odwc93-dakotahernandezs-projects.vercel.app"
+      - key: ALLOWED_HOSTS
+        value: "localhost,127.0.0.1,reconstitutionsafety.com,www.reconstitutionsafety.com,api.reconstitutionsafety.com"
+      - key: ENABLE_PROXY_HEADERS
+        value: "true"
+    healthCheckPath: /health

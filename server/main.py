@@ -31,6 +31,7 @@ DEFAULT_ALLOWED_ORIGINS = [
     "http://127.0.0.1:4173",
     "https://reconstitutionsafety.com",
     "https://www.reconstitutionsafety.com",
+    "https://peptide-harm-reduction-1b0odwc93-dakotahernandezs-projects.vercel.app",
 ]
 DEFAULT_ALLOWED_HOSTS = [
     "testserver",
@@ -39,6 +40,7 @@ DEFAULT_ALLOWED_HOSTS = [
     "reconstitutionsafety.com",
     "www.reconstitutionsafety.com",
     "api.reconstitutionsafety.com",
+    ".onrender.com",
 ]
 DEFAULT_PROXY_TRUSTED_HOSTS = ["127.0.0.1"]
 
@@ -133,8 +135,8 @@ def calculate_dose(payload: CalculationRequest):
     concentration = vial_mg / payload.diluent_ml  # mg per mL
     dose_volume = desired_mg / concentration
     note = (
-        "Always label vials with concentration. Use sterile technique and discard solutions that appear cloudy "
-        "or have particles."
+        "Label all vials with peptide name and concentration (mg/mL). Maintain aseptic technique throughout. "
+        "Discard any solution exhibiting turbidity, particulate matter, or discoloration."
     )
     return CalculationResponse(
         concentration_mg_per_ml=round(concentration, 4),
