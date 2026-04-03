@@ -48,6 +48,7 @@ ALLOWED_ORIGINS = parse_csv_env("ALLOWED_ORIGINS", DEFAULT_ALLOWED_ORIGINS)
 ALLOWED_HOSTS = parse_csv_env("ALLOWED_HOSTS", DEFAULT_ALLOWED_HOSTS)
 PROXY_TRUSTED_HOSTS = parse_csv_env("PROXY_TRUSTED_HOSTS", DEFAULT_PROXY_TRUSTED_HOSTS)
 ENABLE_PROXY_HEADERS = parse_bool_env("ENABLE_PROXY_HEADERS", True)
+ENABLE_TRUSTED_HOST_CHECK = parse_bool_env("ENABLE_TRUSTED_HOST_CHECK", True)
 
 app = FastAPI(
     title="Peptide Harm Reduction API",
@@ -61,7 +62,8 @@ app = FastAPI(
 if ENABLE_PROXY_HEADERS:
     app.add_middleware(ProxyHeadersMiddleware, trusted_hosts=PROXY_TRUSTED_HOSTS)
 
-app.add_middleware(TrustedHostMiddleware, allowed_hosts=ALLOWED_HOSTS)
+if ENABLE_TRUSTED_HOST_CHECK:
+    app.add_middleware(TrustedHostMiddleware, allowed_hosts=ALLOWED_HOSTS)
 
 app.add_middleware(
     CORSMiddleware,

@@ -14,4 +14,6 @@ services:
         value: "localhost,127.0.0.1,reconstitutionsafety.com,www.reconstitutionsafety.com,api.reconstitutionsafety.com,.onrender.com"
       - key: ENABLE_PROXY_HEADERS
         value: "true"
+      - key: ENABLE_TRUSTED_HOST_CHECK
+        value: "false"
     healthCheckPath: /health
