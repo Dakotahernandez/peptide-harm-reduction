@@ -20,4 +20,3 @@ def test_all_displayed_peptide_facts_have_citations():
             for source in sources:
                 assert source.title, f"{peptide.id} citation missing title for fact: {fact}"
                 assert source.url, f"{peptide.id} citation missing url for fact: {fact}"
-

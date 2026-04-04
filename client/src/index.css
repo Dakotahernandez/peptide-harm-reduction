@@ -1,17 +1,50 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
 
-:root {
-  color-scheme: dark;
+@theme {
+  --color-primary: #2563eb;
+  --color-primary-light: #3b82f6;
+  --color-primary-dark: #1d4ed8;
+  --color-accent: #0891b2;
+  --color-danger: #dc2626;
+  --color-warning: #d97706;
+  --color-success: #16a34a;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f8fafc;
+  --color-surface-raised: #f1f5f9;
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
+  --color-text: #0f172a;
+  --color-text-muted: #64748b;
+  --color-text-light: #94a3b8;
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 body {
   margin: 0;
-}
-
-a {
-  color: inherit;
-}
-
-#root {
+  font-family: var(--font-sans);
+  background: var(--color-surface-alt);
+  color: var(--color-text);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
+
+a { color: inherit; }
+#root { min-height: 100vh; }
+
+/* Syringe SVG styles */
+.syringe-svg { width: 100%; max-width: 480px; }
+.syringe-barrel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.2; }
+.syringe-fill-rect { fill: url(#syringe-fill-grad); }
+.syringe-stopper { fill: #94a3b8; stroke: #cbd5e1; stroke-width: 1; }
+.syringe-rod { fill: #cbd5e1; stroke: #94a3b8; stroke-width: 1.1; }
+.syringe-thumb { fill: #94a3b8; stroke: #64748b; stroke-width: 1.2; }
+.syringe-needle { stroke: #2563eb; stroke-width: 2; }
+.syringe-hub { fill: #dbeafe; stroke: #93c5fd; stroke-width: 1.2; }
+.syringe-tick { stroke: #64748b; stroke-width: 1.2; }
+.syringe-tick-label { fill: #64748b; font-size: 10px; font-weight: 600; }
+.syringe-marker-label { fill: #0f172a; font-size: 12px; font-weight: 700; }
+.syringe-marker-bubble { fill: #2563eb; }
+.syringe-svg text { dominant-baseline: middle; }
+.syringe-anim { transition: none; }
+
+@media print { body { background: white; } }

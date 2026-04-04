@@ -1,11 +1,9 @@
 from __future__ import annotations
 
-from typing import List, Optional
 from urllib.parse import quote_plus
 
-from pydantic import PositiveFloat
-
 from models import Citation, Peptide
+from pydantic import PositiveFloat
 
 AAPPTEC_HANDLING = Citation(
     title="AAPPTEC: Handling and Storage of Peptides",
@@ -44,15 +42,15 @@ def pubmed_search(term: str) -> Citation:
 def build_citations(
     *,
     storage: str,
-    typical_protocols: List[str],
-    notes: List[str],
-    benefits: List[str],
-    side_effects: List[str],
-    storage_citations: List[Citation],
-    default_citations: List[Citation],
-    protocol_citations: Optional[List[Citation]] = None,
-) -> dict[str, List[Citation]]:
-    citations: dict[str, List[Citation]] = {
+    typical_protocols: list[str],
+    notes: list[str],
+    benefits: list[str],
+    side_effects: list[str],
+    storage_citations: list[Citation],
+    default_citations: list[Citation],
+    protocol_citations: list[Citation] | None = None,
+) -> dict[str, list[Citation]]:
+    citations: dict[str, list[Citation]] = {
         storage: storage_citations,
     }
     for fact in notes + benefits + side_effects:
@@ -63,7 +61,7 @@ def build_citations(
     return citations
 
 
-def load_peptides() -> List[Peptide]:
+def load_peptides() -> list[Peptide]:
     storage_sources = [AAPPTEC_HANDLING, GENSCRIPT_STORAGE, BACHEM_RECONSTITUTION]
 
     bpc_sources = [pubmed_search("BPC-157")]

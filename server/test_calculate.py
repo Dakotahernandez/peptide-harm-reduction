@@ -1,4 +1,4 @@
-from main import calculate_dose, CalculationRequest
+from main import CalculationRequest, calculate_dose
 
 
 def test_calculation_rounding():

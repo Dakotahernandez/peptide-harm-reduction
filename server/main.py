@@ -1,15 +1,19 @@
+import logging
 import os
-from fastapi import FastAPI, Query, HTTPException
+from typing import List, Literal, Optional
+
+from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, Field, PositiveFloat
-from typing import List, Optional, Literal
+from models import Peptide
+from peptides_data import load_peptides
+from pydantic import BaseModel, Field, PositiveFloat, field_validator
 from starlette.middleware.trustedhost import TrustedHostMiddleware
 from uvicorn.middleware.proxy_headers import ProxyHeadersMiddleware
 
-from models import Peptide
+logger = logging.getLogger("peptide_api")
 
 
-def parse_csv_env(name: str, defaults: List[str]) -> List[str]:
+def parse_csv_env(name: str, defaults: list[str]) -> list[str]:
     raw = os.getenv(name, "")
     if not raw.strip():
         return defaults
@@ -88,6 +92,11 @@ async def add_security_headers(request, call_next):
 Unit = Literal["mg", "mcg", "ug", "µg"]
 
 
+MAX_VIAL_AMOUNT = 100_000  # mcg or mg
+MAX_DILUENT_ML = 100
+MAX_DESIRED_DOSE = 100_000
+
+
 class CalculationRequest(BaseModel):
     vial_amount: PositiveFloat = Field(..., description="Total powder in the vial")
     vial_unit: Unit = Field("mg", description="Unit for vial_amount")
@@ -95,14 +104,33 @@ class CalculationRequest(BaseModel):
     desired_dose: PositiveFloat = Field(..., description="Dose you want to withdraw")
     desired_unit: Unit = Field("mg", description="Unit for desired_dose")
 
+    @field_validator("vial_amount")
+    @classmethod
+    def validate_vial_amount(cls, v: float) -> float:
+        if v > MAX_VIAL_AMOUNT:
+            raise ValueError(f"vial_amount must be <= {MAX_VIAL_AMOUNT}")
+        return v
+
+    @field_validator("diluent_ml")
+    @classmethod
+    def validate_diluent_ml(cls, v: float) -> float:
+        if v > MAX_DILUENT_ML:
+            raise ValueError(f"diluent_ml must be <= {MAX_DILUENT_ML}")
+        return v
+
+    @field_validator("desired_dose")
+    @classmethod
+    def validate_desired_dose(cls, v: float) -> float:
+        if v > MAX_DESIRED_DOSE:
+            raise ValueError(f"desired_dose must be <= {MAX_DESIRED_DOSE}")
+        return v
+
 
 class CalculationResponse(BaseModel):
     concentration_mg_per_ml: float
     dose_volume_ml: float
     note: str
 
-
-from peptides_data import load_peptides
 
 peptides: List[Peptide] = load_peptides()
 
@@ -150,12 +178,24 @@ def calculate_dose(payload: CalculationRequest):
 @app.get("/disclaimer")
 def disclaimer():
     legal_footer = [
-        "This site and its calculators are provided for educational and harm-reduction purposes only. They are not medical advice, diagnosis, or treatment.",
+        (
+            "This site and its calculators are provided for educational and harm-reduction"
+            " purposes only. They are not medical advice, diagnosis, or treatment."
+        ),
         "No clinician-patient relationship is created. Consult a licensed clinician for personalized guidance.",
         "If you think you may be experiencing a medical emergency, call 911 (US) or your local emergency number.",
-        "Information may be incomplete or incorrect and can change over time. You are responsible for verifying units, concentration, sterility, and legality before acting.",
-        "External links and citations are provided for reference only. The operators do not control or endorse third-party content.",
-        "The site is provided 'as-is' without warranties. To the maximum extent permitted by law, the operators disclaim liability for any injury, loss, or damages arising from use of this site.",
+        (
+            "Information may be incomplete or incorrect and can change over time. You are responsible"
+            " for verifying units, concentration, sterility, and legality before acting."
+        ),
+        (
+            "External links and citations are provided for reference only."
+            " The operators do not control or endorse third-party content."
+        ),
+        (
+            "The site is provided 'as-is' without warranties. To the maximum extent permitted by law,"
+            " the operators disclaim liability for any injury, loss, or damages arising from use of this site."
+        ),
     ]
     return {
         "title": "Educational Use Only",
