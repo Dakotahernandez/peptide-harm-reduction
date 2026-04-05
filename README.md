@@ -91,6 +91,7 @@ npm run build
 
 - Content is harm-reduction and research oriented; not medical advice.
 - Add new peptides by extending the list in `server/peptides_data.py`.
+- **Future data migration**: Move peptide data from Python into JSON files (`server/data/peptides.json`) to separate data from code. When the project needs an admin UI, user accounts, or dynamic pricing, migrate to PostgreSQL.
 - Update the disclaimer text via `/disclaimer` in `server/main.py`.
 - Calculator now supports mg / mcg inputs and converts to mg/mL concentration automatically.
 - Peptide profiles include `typical_protocols` and per-fact `citations` (shown via “View citations” in the UI).

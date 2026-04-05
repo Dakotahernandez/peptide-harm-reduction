@@ -1,12 +1,12 @@
 export default function Header({ disclaimer, offlineMode }) {
   return (
-    <header className="mb-8">
-      <div className="flex flex-col lg:flex-row lg:items-start gap-6">
+    <header className="mb-4 sm:mb-8">
+      <div className="flex flex-col lg:flex-row lg:items-start gap-4 sm:gap-6">
         <div className="flex-1">
           <p className="text-xs font-semibold tracking-widest uppercase text-text-muted mb-1">
             Harm Reduction &bull; Research Only
           </p>
-          <h1 className="text-3xl md:text-4xl font-bold text-text leading-tight mb-3">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-text leading-tight mb-2 sm:mb-3">
             Peptide Reconstitution &amp; Dosing Math
           </h1>
           <p className="text-text-muted max-w-2xl mb-3">
@@ -26,7 +26,7 @@ export default function Header({ disclaimer, offlineMode }) {
           </div>
         </div>
 
-        <div className="bg-surface rounded-2xl border border-border p-5 shadow-sm lg:max-w-xs w-full">
+        <div className="bg-surface rounded-2xl border border-border p-3 sm:p-5 shadow-sm lg:max-w-xs w-full">
           <h3 className="font-semibold text-sm text-text mb-2">Safety checklist</h3>
           <ul className="text-sm text-text-muted space-y-1.5 list-disc pl-4">
             <li>Label vials with peptide name and concentration.</li>

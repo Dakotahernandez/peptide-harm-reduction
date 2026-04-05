@@ -30,6 +30,10 @@ DAILYMED_VYLEESI = Citation(
     title="DailyMed: Vyleesi (bremelanotide) label",
     url="https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=f1d0c1b5-2f39-4bad-a6a4-0066e3ad5dcf",
 )
+DAILYMED_EGRIFTA = Citation(
+    title="DailyMed: Egrifta (tesamorelin) label",
+    url="https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=2a04a90e-76a0-4859-aa51-47a082cc31d0",
+)
 
 
 def pubmed_search(term: str) -> Citation:
@@ -445,6 +449,369 @@ def load_peptides() -> list[Peptide]:
     reta_side_effects = [
         "GI upset, nausea, diarrhea possible especially early in titration",
         "Potential hypoglycemia when combined with other glucose-lowering agents",
+    ]
+
+    tesamorelin_sources = [pubmed_search("Tesamorelin"), DAILYMED_EGRIFTA]
+    tesamorelin_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C."
+    tesamorelin_protocols = ["Daily"]
+    tesamorelin_notes = [
+        "FDA-approved GHRH analog for lipodystrophy. Stimulates pulsatile GH release.",
+        "Research doses often 1-2 mg daily.",
+    ]
+    tesamorelin_benefits = [
+        "Stimulates pulsatile GH release.",
+        "FDA-approved for lipodystrophy.",
+    ]
+    tesamorelin_side_effects = [
+        "Injection site reactions",
+        "Joint pain, peripheral edema",
+    ]
+
+    epi_sources = [pubmed_search("Epitalon telomerase")]
+    epi_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C."
+    epi_protocols = ["Daily"]
+    epi_notes = [
+        "Research doses often 5-10 mg per administration in short cycles.",
+        "Researchers typically run 10-20 day protocols with breaks between.",
+    ]
+    epi_benefits = [
+        "Studied for telomerase activation and potential anti-aging effects",
+        "May support pineal gland function and melatonin regulation in models",
+    ]
+    epi_side_effects = [
+        "Injection site irritation",
+        "Limited human data; monitor for unexpected reactions",
+    ]
+
+    ghk_sources = [pubmed_search("GHK-Cu copper peptide")]
+    ghk_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C."
+    ghk_protocols = ["Daily"]
+    ghk_notes = [
+        "Tripeptide-copper complex; some researchers use subQ or topical routes.",
+        "Handle with care to avoid copper oxidation; protect from light.",
+    ]
+    ghk_benefits = [
+        "Studied for wound healing and collagen synthesis stimulation",
+        "Anti-inflammatory properties observed in preclinical models",
+    ]
+    ghk_side_effects = [
+        "Injection site discoloration from copper",
+        "Localized irritation or redness",
+    ]
+
+    oxy_sources = [pubmed_search("Oxytocin")]
+    oxy_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C and protect from light."
+    oxy_protocols = ["As needed"]
+    oxy_notes = [
+        "Often administered intranasally in research; sterile technique still applies.",
+        "Protect from light after reconstitution to reduce degradation.",
+    ]
+    oxy_benefits = [
+        "Peptide hormone studied for social bonding and stress modulation",
+        "Investigated for reproductive and behavioral endpoints",
+    ]
+    oxy_side_effects = [
+        "Headache at higher doses",
+        "Nausea reported in some studies",
+    ]
+
+    igf_des_sources = [pubmed_search("IGF-1 DES")]
+    igf_des_storage = "Store lyophilized at -20°C long term; 2-8°C short term; reconstituted 2-8°C."
+    igf_des_protocols = ["Daily"]
+    igf_des_notes = [
+        "Truncated IGF-1 variant with much higher potency and shorter half-life.",
+        "Track glucose levels; insulin-like activity is more pronounced than IGF-1 LR3.",
+    ]
+    igf_des_benefits = [
+        "Potent localized growth factor; studied for tissue-specific effects",
+        "Reduced IGFBP binding increases bioavailability at injection site",
+    ]
+    igf_des_side_effects = [
+        "Hypoglycemia risk; monitor glucose in research",
+        "Injection site reactions",
+    ]
+
+    gona_sources = [pubmed_search("Gonadorelin")]
+    gona_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C."
+    gona_protocols = ["Daily", "Twice weekly"]
+    gona_notes = [
+        "Research often uses 100-500 mcg per administration.",
+        "Used in fertility and endocrine function studies.",
+    ]
+    gona_benefits = [
+        "Synthetic GnRH that stimulates LH/FSH release from pituitary",
+        "Useful for reproductive endocrine research protocols",
+    ]
+    gona_side_effects = [
+        "Headache and flushing",
+        "Injection site reactions",
+    ]
+
+    trip_sources = [pubmed_search("Triptorelin")]
+    trip_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C."
+    trip_protocols = ["Once weekly"]
+    trip_notes = [
+        "Long-acting GnRH agonist; initial LH/FSH surge then suppression.",
+        "Handle carefully—small doses around 100 mcg in research settings.",
+    ]
+    trip_benefits = [
+        "Potent GnRH agonist for studying HPG axis modulation",
+        "Sustained suppression after initial stimulation phase",
+    ]
+    trip_side_effects = [
+        "Hot flashes and headache",
+        "Hormonal fluctuations during initial surge phase",
+    ]
+
+    kiss_sources = [pubmed_search("Kisspeptin-10")]
+    kiss_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C."
+    kiss_protocols = ["Daily"]
+    kiss_notes = [
+        "Stimulates GnRH release upstream of pituitary.",
+        "Research doses vary widely; document LH pulsatility responses.",
+    ]
+    kiss_benefits = [
+        "Key regulator of reproductive endocrinology via GnRH stimulation",
+        "Studied for LH pulsatility and fertility research applications",
+    ]
+    kiss_side_effects = [
+        "Flushing and headache",
+        "Limited human data; monitor for unexpected reactions",
+    ]
+
+    ta1_sources = [pubmed_search("Thymosin alpha 1")]
+    ta1_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C."
+    ta1_protocols = ["Twice weekly"]
+    ta1_notes = [
+        "28-amino-acid peptide; research doses often 1.6 mg twice weekly.",
+        "Approved in some countries for hepatitis B/C adjunctive therapy.",
+    ]
+    ta1_benefits = [
+        "Studied for immune modulation and dendritic cell maturation",
+        "Generally well-tolerated in clinical studies across multiple countries",
+    ]
+    ta1_side_effects = [
+        "Injection site discomfort",
+    ]
+
+    ace_sources = [pubmed_search("ACE-031 myostatin")]
+    ace_storage = "Store lyophilized at -20°C long term; 2-8°C short term; reconstituted 2-8°C."
+    ace_protocols = ["Once weekly"]
+    ace_notes = [
+        "Protein-based; handle gently to preserve tertiary structure.",
+        "Clinical trials halted for safety; research use only.",
+    ]
+    ace_benefits = [
+        "Soluble ActRIIB decoy that binds myostatin and related ligands",
+        "Studied for muscle mass accrual in preclinical and early clinical work",
+    ]
+    ace_side_effects = [
+        "Epistaxis and gum bleeding reported in trials",
+        "Telangiectasias observed at clinical doses",
+    ]
+
+    ll37_sources = [pubmed_search("LL-37 cathelicidin")]
+    ll37_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C."
+    ll37_protocols = ["Daily"]
+    ll37_notes = [
+        "37-amino-acid human antimicrobial peptide.",
+        "Studied for immune defense, wound healing, and biofilm disruption.",
+    ]
+    ll37_benefits = [
+        "Broad-spectrum antimicrobial activity in preclinical models",
+        "May support wound healing and biofilm disruption",
+    ]
+    ll37_side_effects = [
+        "Injection site pain or irritation",
+        "Potential inflammatory response at high doses",
+    ]
+
+    ftpp_sources = [pubmed_search("FTPP Adipotide prohibitin")]
+    ftpp_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C."
+    ftpp_protocols = ["Daily"]
+    ftpp_notes = [
+        "Fat-targeting chimeric peptide; primate model data available.",
+        "Monitor renal markers closely—kidney stress reported in studies.",
+    ]
+    ftpp_benefits = [
+        "Prohibitin-targeting peptide studied for selective fat apoptosis",
+        "Demonstrated targeted fat loss in primate models",
+    ]
+    ftpp_side_effects = [
+        "Kidney stress—monitor renal markers carefully",
+        "Dehydration risk; very limited human data",
+    ]
+
+    mgf_sources = [pubmed_search("Mechano Growth Factor MGF")]
+    mgf_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C."
+    mgf_protocols = ["Daily"]
+    mgf_notes = [
+        "IGF-1 splice variant with very short half-life (minutes) without PEGylation.",
+        "Often researched locally at target muscle site for localized effects.",
+    ]
+    mgf_benefits = [
+        "Splice variant of IGF-1 studied for muscle repair signaling",
+        "Short half-life allows site-specific research applications",
+    ]
+    mgf_side_effects = [
+        "Hypoglycemia-like symptoms; monitor glucose",
+        "Injection site irritation",
+    ]
+
+    ara_sources = [pubmed_search("ARA-290 Cibinitide")]
+    ara_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C."
+    ara_protocols = ["Daily"]
+    ara_notes = [
+        "11-amino-acid EPO-derived peptide; no erythropoietic effects.",
+        "Binds innate repair receptor (EPOR/CD131); well-tolerated in clinical trials.",
+    ]
+    ara_benefits = [
+        "Studied for neuropathy and tissue repair via innate repair receptor",
+        "Non-erythropoietic EPO derivative with distinct mechanism",
+    ]
+    ara_side_effects = [
+        "Injection site reactions",
+    ]
+
+    hcg_sources = [pubmed_search("Human Chorionic Gonadotropin")]
+    hcg_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C; use within 30 days."
+    hcg_protocols = ["Twice weekly"]
+    hcg_notes = [
+        "Dosed in international units (IU); vial_amount_mg represents IU for this peptide.",
+        "Research doses often 250-500 IU per administration for testicular maintenance.",
+    ]
+    hcg_benefits = [
+        "Mimics LH activity; widely used in fertility research",
+        "Studied for maintaining testicular function during testosterone protocols",
+    ]
+    hcg_side_effects = [
+        "Water retention and mood changes",
+        "Gynecomastia risk at high doses",
+    ]
+
+    cagri_sources = [pubmed_search("Cagrilintide")]
+    cagri_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C."
+    cagri_protocols = ["Once weekly"]
+    cagri_notes = [
+        "Long-acting amylin analog (acylated) for weekly subcutaneous dosing.",
+        "Component of combined CagriSema therapy with semaglutide in research.",
+    ]
+    cagri_benefits = [
+        "Studied for weight management and appetite suppression",
+        "Amylin pathway activation complements GLP-1 signaling",
+    ]
+    cagri_side_effects = [
+        "Nausea and GI discomfort during titration",
+        "Injection site reactions",
+    ]
+
+    cart_sources = [pubmed_search("Cartalax peptide bioregulator")]
+    cart_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C."
+    cart_protocols = ["Daily"]
+    cart_notes = [
+        "Khavinson tripeptide (Ala-Glu-Asp) bioregulator.",
+        "Studied for cartilage and connective tissue support; limited published data.",
+    ]
+    cart_benefits = [
+        "Bioregulator peptide studied for cartilage tissue support",
+        "Part of Khavinson peptide family for tissue-specific regulation",
+    ]
+    cart_side_effects = [
+        "Injection site irritation possible",
+        "Very limited published data; monitor for unexpected reactions",
+    ]
+
+    fox_sources = [pubmed_search("FOXO4-DRI senolytic")]
+    fox_storage = "Store lyophilized at -20°C long term; 2-8°C short term; reconstituted 2-8°C."
+    fox_protocols = ["Daily"]
+    fox_notes = [
+        "D-retro-inverso peptide; typically cycled in research protocols.",
+        "Disrupts FOXO4-p53 interaction in senescent cells.",
+    ]
+    fox_benefits = [
+        "Studied for selective clearance of senescent cells in mouse models",
+        "Novel senolytic mechanism via FOXO4-p53 disruption",
+    ]
+    fox_side_effects = [
+        "Limited data; monitor for unexpected immune reactions",
+    ]
+
+    mt1_sources = [pubmed_search("Afamelanotide Melanotan")]
+    mt1_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C and protect from light."
+    mt1_protocols = ["Daily"]
+    mt1_notes = [
+        "Linear α-MSH analog; more selective than Melanotan II.",
+        "FDA-approved as Scenesse for erythropoietic protoporphyria.",
+    ]
+    mt1_benefits = [
+        "Selective melanocortin agonist for pigmentation and photoprotection",
+        "Does not exhibit the libido effects associated with Melanotan II",
+    ]
+    mt1_side_effects = [
+        "Nausea and flushing",
+        "Darkening of existing moles or nevi",
+    ]
+
+    ova_sources = [pubmed_search("Ovagen peptide bioregulator liver")]
+    ova_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C."
+    ova_protocols = ["Daily"]
+    ova_notes = [
+        "Khavinson tripeptide (Lys-Glu-Asp) bioregulator.",
+        "Studied for liver and GI tract support; limited published human data.",
+    ]
+    ova_benefits = [
+        "Bioregulator peptide studied for liver tissue support",
+        "Part of Khavinson series for organ-specific regulation",
+    ]
+    ova_side_effects = [
+        "Minimal reported side effects",
+        "Limited published human data; monitor carefully",
+    ]
+
+    snap_sources = [pubmed_search("SNAP-8 acetyl octapeptide")]
+    snap_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C."
+    snap_protocols = ["Daily"]
+    snap_notes = [
+        "Octapeptide mimicking N-terminal of SNAP-25 protein.",
+        "Largely studied topically; injectable side effect data is limited.",
+    ]
+    snap_benefits = [
+        "Studied for reducing neuromuscular activity (botox-like mechanism)",
+        "Potential cosmetic and dermatological research applications",
+    ]
+    snap_side_effects = [
+        "Injection site irritation",
+    ]
+
+    testa_sources = [pubmed_search("Testagen peptide bioregulator testes")]
+    testa_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C."
+    testa_protocols = ["Daily"]
+    testa_notes = [
+        "Khavinson bioregulator peptide for testicular function research.",
+        "Very limited published data; document all observations carefully.",
+    ]
+    testa_benefits = [
+        "Studied for testicular function and testosterone support",
+        "Khavinson bioregulator series for reproductive tissue",
+    ]
+    testa_side_effects = [
+        "Minimal reported; monitor hormonal markers in research",
+    ]
+
+    glut_sources = [pubmed_search("Glutathione injectable")]
+    glut_storage = "Store lyophilized at 2-8°C; reconstituted solution 2-8°C; protect from light."
+    glut_protocols = ["Daily", "Twice weekly"]
+    glut_notes = [
+        "Tripeptide (Glu-Cys-Gly) — the body's master antioxidant.",
+        "Available in multiple vial sizes; calculate concentration carefully.",
+    ]
+    glut_benefits = [
+        "Master antioxidant studied for oxidative stress and detoxification",
+        "Investigated for skin lightening and cellular protection",
+    ]
+    glut_side_effects = [
+        "Injection site pain",
+        "Zinc depletion possible with chronic high-dose use",
     ]
 
     return [
@@ -937,7 +1304,7 @@ def load_peptides() -> list[Peptide]:
         Peptide(
             id="tirzepatide",
             name="Tirzepatide",
-            aka=["Dual GIP/GLP-1"],
+            aka=["Dual GIP/GLP-1", "AL-TRZ"],
             category="Metabolic peptide",
             vial_amount_mg=PositiveFloat(10.0),
             typical_diluent_ml=PositiveFloat(2.0),
@@ -960,7 +1327,7 @@ def load_peptides() -> list[Peptide]:
         Peptide(
             id="retatrutide",
             name="Retatrutide",
-            aka=["Triple agonist", "GIP/GLP-1/GCGR"],
+            aka=["Triple agonist", "GIP/GLP-1/GCGR", "GLP3-RT"],
             category="Metabolic peptide",
             vial_amount_mg=PositiveFloat(5.0),
             typical_diluent_ml=PositiveFloat(2.0),
@@ -977,6 +1344,512 @@ def load_peptides() -> list[Peptide]:
                 side_effects=reta_side_effects,
                 storage_citations=storage_sources,
                 default_citations=reta_sources,
+            ),
+        ),
+        Peptide(
+            id="tesamorelin",
+            name="Tesamorelin",
+            aka=["Egrifta"],
+            category="GHRH analog",
+            vial_amount_mg=PositiveFloat(2.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+            storage=tesamorelin_storage,
+            typical_protocols=tesamorelin_protocols,
+            notes=tesamorelin_notes,
+            benefits=tesamorelin_benefits,
+            side_effects=tesamorelin_side_effects,
+            citations=build_citations(
+                storage=tesamorelin_storage,
+                typical_protocols=tesamorelin_protocols,
+                notes=tesamorelin_notes,
+                benefits=tesamorelin_benefits,
+                side_effects=tesamorelin_side_effects,
+                storage_citations=storage_sources,
+                default_citations=tesamorelin_sources,
+            ),
+        ),
+        Peptide(
+            id="epitalon",
+            name="Epitalon",
+            aka=["Epithalon", "Epithalone"],
+            category="Anti-aging peptide",
+            vial_amount_mg=PositiveFloat(10.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+            storage=epi_storage,
+            typical_protocols=epi_protocols,
+            notes=epi_notes,
+            benefits=epi_benefits,
+            side_effects=epi_side_effects,
+            citations=build_citations(
+                storage=epi_storage,
+                typical_protocols=epi_protocols,
+                notes=epi_notes,
+                benefits=epi_benefits,
+                side_effects=epi_side_effects,
+                storage_citations=storage_sources,
+                default_citations=epi_sources,
+            ),
+        ),
+        Peptide(
+            id="ghk-cu",
+            name="GHK-Cu",
+            aka=["Copper Peptide", "GHK Copper"],
+            category="Regenerative peptide",
+            vial_amount_mg=PositiveFloat(5.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+            storage=ghk_storage,
+            typical_protocols=ghk_protocols,
+            notes=ghk_notes,
+            benefits=ghk_benefits,
+            side_effects=ghk_side_effects,
+            citations=build_citations(
+                storage=ghk_storage,
+                typical_protocols=ghk_protocols,
+                notes=ghk_notes,
+                benefits=ghk_benefits,
+                side_effects=ghk_side_effects,
+                storage_citations=storage_sources,
+                default_citations=ghk_sources,
+            ),
+        ),
+        Peptide(
+            id="oxytocin",
+            name="Oxytocin",
+            aka=["OT"],
+            category="Peptide hormone",
+            vial_amount_mg=PositiveFloat(2.0),
+            typical_diluent_ml=PositiveFloat(1.0),
+            storage=oxy_storage,
+            typical_protocols=oxy_protocols,
+            notes=oxy_notes,
+            benefits=oxy_benefits,
+            side_effects=oxy_side_effects,
+            citations=build_citations(
+                storage=oxy_storage,
+                typical_protocols=oxy_protocols,
+                notes=oxy_notes,
+                benefits=oxy_benefits,
+                side_effects=oxy_side_effects,
+                storage_citations=storage_sources,
+                default_citations=oxy_sources,
+            ),
+        ),
+        Peptide(
+            id="igf-1-des",
+            name="IGF-1 DES",
+            aka=["Des(1-3) IGF-1"],
+            category="IGF analog",
+            vial_amount_mg=PositiveFloat(1.0),
+            typical_diluent_ml=PositiveFloat(1.0),
+            storage=igf_des_storage,
+            typical_protocols=igf_des_protocols,
+            notes=igf_des_notes,
+            benefits=igf_des_benefits,
+            side_effects=igf_des_side_effects,
+            citations=build_citations(
+                storage=igf_des_storage,
+                typical_protocols=igf_des_protocols,
+                notes=igf_des_notes,
+                benefits=igf_des_benefits,
+                side_effects=igf_des_side_effects,
+                storage_citations=storage_sources,
+                default_citations=igf_des_sources,
+            ),
+        ),
+        Peptide(
+            id="gonadorelin",
+            name="Gonadorelin",
+            aka=["GnRH", "LHRH"],
+            category="GnRH analog",
+            vial_amount_mg=PositiveFloat(2.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+            storage=gona_storage,
+            typical_protocols=gona_protocols,
+            notes=gona_notes,
+            benefits=gona_benefits,
+            side_effects=gona_side_effects,
+            citations=build_citations(
+                storage=gona_storage,
+                typical_protocols=gona_protocols,
+                notes=gona_notes,
+                benefits=gona_benefits,
+                side_effects=gona_side_effects,
+                storage_citations=storage_sources,
+                default_citations=gona_sources,
+            ),
+        ),
+        Peptide(
+            id="triptorelin",
+            name="Triptorelin",
+            aka=["GnRH agonist", "Trelstar"],
+            category="GnRH analog",
+            vial_amount_mg=PositiveFloat(2.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+            storage=trip_storage,
+            typical_protocols=trip_protocols,
+            notes=trip_notes,
+            benefits=trip_benefits,
+            side_effects=trip_side_effects,
+            citations=build_citations(
+                storage=trip_storage,
+                typical_protocols=trip_protocols,
+                notes=trip_notes,
+                benefits=trip_benefits,
+                side_effects=trip_side_effects,
+                storage_citations=storage_sources,
+                default_citations=trip_sources,
+            ),
+        ),
+        Peptide(
+            id="kisspeptin-10",
+            name="Kisspeptin-10",
+            aka=["KP-10", "Metastin 45-54"],
+            category="Reproductive peptide",
+            vial_amount_mg=PositiveFloat(10.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+            storage=kiss_storage,
+            typical_protocols=kiss_protocols,
+            notes=kiss_notes,
+            benefits=kiss_benefits,
+            side_effects=kiss_side_effects,
+            citations=build_citations(
+                storage=kiss_storage,
+                typical_protocols=kiss_protocols,
+                notes=kiss_notes,
+                benefits=kiss_benefits,
+                side_effects=kiss_side_effects,
+                storage_citations=storage_sources,
+                default_citations=kiss_sources,
+            ),
+        ),
+        Peptide(
+            id="thymosin-alpha-1",
+            name="Thymosin Alpha 1",
+            aka=["Tα1", "Zadaxin"],
+            category="Immune peptide",
+            vial_amount_mg=PositiveFloat(5.0),
+            typical_diluent_ml=PositiveFloat(1.0),
+            storage=ta1_storage,
+            typical_protocols=ta1_protocols,
+            notes=ta1_notes,
+            benefits=ta1_benefits,
+            side_effects=ta1_side_effects,
+            citations=build_citations(
+                storage=ta1_storage,
+                typical_protocols=ta1_protocols,
+                notes=ta1_notes,
+                benefits=ta1_benefits,
+                side_effects=ta1_side_effects,
+                storage_citations=storage_sources,
+                default_citations=ta1_sources,
+            ),
+        ),
+        Peptide(
+            id="ace-031",
+            name="ACE-031",
+            aka=["ActRIIB-Fc", "Myostatin inhibitor"],
+            category="Myostatin inhibitor",
+            vial_amount_mg=PositiveFloat(1.0),
+            typical_diluent_ml=PositiveFloat(1.0),
+            storage=ace_storage,
+            typical_protocols=ace_protocols,
+            notes=ace_notes,
+            benefits=ace_benefits,
+            side_effects=ace_side_effects,
+            citations=build_citations(
+                storage=ace_storage,
+                typical_protocols=ace_protocols,
+                notes=ace_notes,
+                benefits=ace_benefits,
+                side_effects=ace_side_effects,
+                storage_citations=storage_sources,
+                default_citations=ace_sources,
+            ),
+        ),
+        Peptide(
+            id="ll-37",
+            name="LL-37",
+            aka=["CAP-18", "Cathelicidin"],
+            category="Antimicrobial peptide",
+            vial_amount_mg=PositiveFloat(5.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+            storage=ll37_storage,
+            typical_protocols=ll37_protocols,
+            notes=ll37_notes,
+            benefits=ll37_benefits,
+            side_effects=ll37_side_effects,
+            citations=build_citations(
+                storage=ll37_storage,
+                typical_protocols=ll37_protocols,
+                notes=ll37_notes,
+                benefits=ll37_benefits,
+                side_effects=ll37_side_effects,
+                storage_citations=storage_sources,
+                default_citations=ll37_sources,
+            ),
+        ),
+        Peptide(
+            id="ftpp",
+            name="FTPP",
+            aka=["Adipotide"],
+            category="Experimental peptide",
+            vial_amount_mg=PositiveFloat(5.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+            storage=ftpp_storage,
+            typical_protocols=ftpp_protocols,
+            notes=ftpp_notes,
+            benefits=ftpp_benefits,
+            side_effects=ftpp_side_effects,
+            citations=build_citations(
+                storage=ftpp_storage,
+                typical_protocols=ftpp_protocols,
+                notes=ftpp_notes,
+                benefits=ftpp_benefits,
+                side_effects=ftpp_side_effects,
+                storage_citations=storage_sources,
+                default_citations=ftpp_sources,
+            ),
+        ),
+        Peptide(
+            id="mgf",
+            name="MGF",
+            aka=["Mechano Growth Factor", "IGF-1Ec"],
+            category="IGF variant",
+            vial_amount_mg=PositiveFloat(2.0),
+            typical_diluent_ml=PositiveFloat(1.0),
+            storage=mgf_storage,
+            typical_protocols=mgf_protocols,
+            notes=mgf_notes,
+            benefits=mgf_benefits,
+            side_effects=mgf_side_effects,
+            citations=build_citations(
+                storage=mgf_storage,
+                typical_protocols=mgf_protocols,
+                notes=mgf_notes,
+                benefits=mgf_benefits,
+                side_effects=mgf_side_effects,
+                storage_citations=storage_sources,
+                default_citations=mgf_sources,
+            ),
+        ),
+        Peptide(
+            id="ara-290",
+            name="ARA-290",
+            aka=["Cibinitide"],
+            category="Innate repair peptide",
+            vial_amount_mg=PositiveFloat(16.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+            storage=ara_storage,
+            typical_protocols=ara_protocols,
+            notes=ara_notes,
+            benefits=ara_benefits,
+            side_effects=ara_side_effects,
+            citations=build_citations(
+                storage=ara_storage,
+                typical_protocols=ara_protocols,
+                notes=ara_notes,
+                benefits=ara_benefits,
+                side_effects=ara_side_effects,
+                storage_citations=storage_sources,
+                default_citations=ara_sources,
+            ),
+        ),
+        Peptide(
+            id="hcg",
+            name="HCG",
+            aka=["Human Chorionic Gonadotropin"],
+            category="Gonadotropin",
+            vial_amount_mg=PositiveFloat(5000.0),
+            typical_diluent_ml=PositiveFloat(5.0),
+            storage=hcg_storage,
+            typical_protocols=hcg_protocols,
+            notes=hcg_notes,
+            benefits=hcg_benefits,
+            side_effects=hcg_side_effects,
+            citations=build_citations(
+                storage=hcg_storage,
+                typical_protocols=hcg_protocols,
+                notes=hcg_notes,
+                benefits=hcg_benefits,
+                side_effects=hcg_side_effects,
+                storage_citations=storage_sources,
+                default_citations=hcg_sources,
+            ),
+        ),
+        Peptide(
+            id="cagrilintide",
+            name="Cagrilintide",
+            aka=["CagriSema component"],
+            category="Metabolic peptide",
+            vial_amount_mg=PositiveFloat(10.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+            storage=cagri_storage,
+            typical_protocols=cagri_protocols,
+            notes=cagri_notes,
+            benefits=cagri_benefits,
+            side_effects=cagri_side_effects,
+            citations=build_citations(
+                storage=cagri_storage,
+                typical_protocols=cagri_protocols,
+                notes=cagri_notes,
+                benefits=cagri_benefits,
+                side_effects=cagri_side_effects,
+                storage_citations=storage_sources,
+                default_citations=cagri_sources,
+            ),
+        ),
+        Peptide(
+            id="cartalax",
+            name="Cartalax",
+            aka=["Ala-Glu-Asp"],
+            category="Bioregulator peptide",
+            vial_amount_mg=PositiveFloat(20.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+            storage=cart_storage,
+            typical_protocols=cart_protocols,
+            notes=cart_notes,
+            benefits=cart_benefits,
+            side_effects=cart_side_effects,
+            citations=build_citations(
+                storage=cart_storage,
+                typical_protocols=cart_protocols,
+                notes=cart_notes,
+                benefits=cart_benefits,
+                side_effects=cart_side_effects,
+                storage_citations=storage_sources,
+                default_citations=cart_sources,
+            ),
+        ),
+        Peptide(
+            id="fox04-dri",
+            name="FOX04-DRI",
+            aka=["FOXO4-DRI", "Senolytic peptide"],
+            category="Anti-aging peptide",
+            vial_amount_mg=PositiveFloat(10.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+            storage=fox_storage,
+            typical_protocols=fox_protocols,
+            notes=fox_notes,
+            benefits=fox_benefits,
+            side_effects=fox_side_effects,
+            citations=build_citations(
+                storage=fox_storage,
+                typical_protocols=fox_protocols,
+                notes=fox_notes,
+                benefits=fox_benefits,
+                side_effects=fox_side_effects,
+                storage_citations=storage_sources,
+                default_citations=fox_sources,
+            ),
+        ),
+        Peptide(
+            id="melanotan-1",
+            name="Melanotan I",
+            aka=["Afamelanotide", "MT-I"],
+            category="Melanocortin analog",
+            vial_amount_mg=PositiveFloat(10.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+            storage=mt1_storage,
+            typical_protocols=mt1_protocols,
+            notes=mt1_notes,
+            benefits=mt1_benefits,
+            side_effects=mt1_side_effects,
+            citations=build_citations(
+                storage=mt1_storage,
+                typical_protocols=mt1_protocols,
+                notes=mt1_notes,
+                benefits=mt1_benefits,
+                side_effects=mt1_side_effects,
+                storage_citations=storage_sources,
+                default_citations=mt1_sources,
+            ),
+        ),
+        Peptide(
+            id="ovagen",
+            name="Ovagen",
+            aka=["Lys-Glu-Asp"],
+            category="Bioregulator peptide",
+            vial_amount_mg=PositiveFloat(20.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+            storage=ova_storage,
+            typical_protocols=ova_protocols,
+            notes=ova_notes,
+            benefits=ova_benefits,
+            side_effects=ova_side_effects,
+            citations=build_citations(
+                storage=ova_storage,
+                typical_protocols=ova_protocols,
+                notes=ova_notes,
+                benefits=ova_benefits,
+                side_effects=ova_side_effects,
+                storage_citations=storage_sources,
+                default_citations=ova_sources,
+            ),
+        ),
+        Peptide(
+            id="snap-8",
+            name="SNAP-8",
+            aka=["Acetyl Octapeptide-3"],
+            category="Cosmetic peptide",
+            vial_amount_mg=PositiveFloat(10.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+            storage=snap_storage,
+            typical_protocols=snap_protocols,
+            notes=snap_notes,
+            benefits=snap_benefits,
+            side_effects=snap_side_effects,
+            citations=build_citations(
+                storage=snap_storage,
+                typical_protocols=snap_protocols,
+                notes=snap_notes,
+                benefits=snap_benefits,
+                side_effects=snap_side_effects,
+                storage_citations=storage_sources,
+                default_citations=snap_sources,
+            ),
+        ),
+        Peptide(
+            id="testagen",
+            name="Testagen",
+            aka=["Testagen peptide"],
+            category="Bioregulator peptide",
+            vial_amount_mg=PositiveFloat(20.0),
+            typical_diluent_ml=PositiveFloat(2.0),
+            storage=testa_storage,
+            typical_protocols=testa_protocols,
+            notes=testa_notes,
+            benefits=testa_benefits,
+            side_effects=testa_side_effects,
+            citations=build_citations(
+                storage=testa_storage,
+                typical_protocols=testa_protocols,
+                notes=testa_notes,
+                benefits=testa_benefits,
+                side_effects=testa_side_effects,
+                storage_citations=storage_sources,
+                default_citations=testa_sources,
+            ),
+        ),
+        Peptide(
+            id="glutathione",
+            name="Glutathione",
+            aka=["GSH", "L-Glutathione"],
+            category="Antioxidant peptide",
+            vial_amount_mg=PositiveFloat(600.0),
+            typical_diluent_ml=PositiveFloat(5.0),
+            storage=glut_storage,
+            typical_protocols=glut_protocols,
+            notes=glut_notes,
+            benefits=glut_benefits,
+            side_effects=glut_side_effects,
+            citations=build_citations(
+                storage=glut_storage,
+                typical_protocols=glut_protocols,
+                notes=glut_notes,
+                benefits=glut_benefits,
+                side_effects=glut_side_effects,
+                storage_citations=storage_sources,
+                default_citations=glut_sources,
             ),
         ),
     ]

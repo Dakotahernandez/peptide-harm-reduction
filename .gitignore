@@ -28,3 +28,7 @@ yarn-error.log*
 # Coverage
 coverage/
 .pytest_cache/
+
+
+notes.txt
+ADD_MISSING_PEPTIDES.md

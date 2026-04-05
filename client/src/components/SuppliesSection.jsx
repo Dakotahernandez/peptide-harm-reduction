@@ -4,17 +4,29 @@ export default function SuppliesSection() {
   const activeSupplierLinks = SUPPLIER_LINKS.filter((s) => s.href);
 
   return (
-    <section className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
+    <section className="rounded-2xl border border-border bg-surface p-3 sm:p-5 shadow-sm">
       <p className="text-xs font-semibold tracking-widest uppercase text-text-muted mb-1">Reference</p>
       <h2 className="text-xl font-bold text-text mb-4">Recommended Supplies</h2>
 
-      <div className="grid grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-3">
-        {SUPPLIES.map((item) => (
-          <div key={item.name} className="rounded-xl border border-border bg-surface-alt p-4">
-            <h3 className="font-semibold text-sm text-text mb-1">{item.name}</h3>
-            <p className="text-sm text-text-muted">{item.description}</p>
-          </div>
-        ))}
+      <div className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(240px,1fr))] gap-3">
+        {SUPPLIES.map((item) => {
+          const Tag = item.href ? 'a' : 'div';
+          const linkProps = item.href
+            ? { href: item.href, target: '_blank', rel: 'noopener noreferrer sponsored' }
+            : {};
+          return (
+            <Tag
+              key={item.name}
+              {...linkProps}
+              className={`block rounded-xl border border-border bg-surface-alt p-4 ${item.href ? 'hover:border-primary/40 hover:shadow-md transition-all' : ''}`}
+            >
+              <h3 className="font-semibold text-sm text-text mb-1">
+                {item.name}{item.href ? ' *' : ''}
+              </h3>
+              <p className="text-sm text-text-muted">{item.description}</p>
+            </Tag>
+          );
+        })}
       </div>
 
       {activeSupplierLinks.length > 0 && (
@@ -23,7 +35,7 @@ export default function SuppliesSection() {
           <p className="text-xs text-text-muted mb-3">
             Links marked with * are affiliate links. See disclosure above.
           </p>
-          <div className="grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-3">
             {activeSupplierLinks.map((link) => (
               <a
                 key={link.name}

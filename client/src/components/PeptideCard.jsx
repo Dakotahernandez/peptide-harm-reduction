@@ -1,6 +1,8 @@
+import PurchaseOptions from './PurchaseOptions';
+
 export default function PeptideCard({ peptide, onViewCitations }) {
   return (
-    <article className="rounded-xl border border-border bg-surface p-4 shadow-sm hover:border-primary/40 hover:shadow-md transition-all duration-150">
+    <article className="rounded-xl border border-border bg-surface p-3 sm:p-4 shadow-sm hover:border-primary/40 hover:shadow-md transition-all duration-150">
       <div className="flex justify-between items-start gap-3">
         <div className="min-w-0">
           <p className="text-xs font-semibold tracking-widest uppercase text-text-muted">{peptide.category}</p>
@@ -56,6 +58,8 @@ export default function PeptideCard({ peptide, onViewCitations }) {
       <ul className="mt-2 text-sm text-text-muted list-disc pl-4 space-y-0.5">
         {peptide.notes.map((n, idx) => <li key={idx}>{n}</li>)}
       </ul>
+
+      <PurchaseOptions peptideName={peptide.name} />
     </article>
   );
 }

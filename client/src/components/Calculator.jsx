@@ -92,7 +92,7 @@ export default function Calculator({ setError }) {
   };
 
   return (
-    <section className="rounded-2xl border border-border bg-surface p-5 shadow-sm">
+    <section className="rounded-2xl border border-border bg-surface p-3 sm:p-5 shadow-sm">
       <div className="flex flex-wrap gap-3 items-start justify-between mb-2">
         <div>
           <p className="text-xs font-semibold tracking-widest uppercase text-text-muted">Dose math</p>
@@ -122,7 +122,7 @@ export default function Calculator({ setError }) {
         <ReconGuide show={showGuide} />
       </div>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-3 mt-4">
+      <div className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-3 mt-4">
         <label className="text-sm font-medium text-text">
           Vial powder
           <div className="grid grid-cols-[1fr_100px] gap-2 mt-1">
@@ -214,7 +214,7 @@ export default function Calculator({ setError }) {
       </div>
 
       {calcResult && (
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-3 mt-4 p-4 rounded-xl border border-border bg-surface-alt">
+        <div className="grid grid-cols-2 sm:grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-3 mt-4 p-3 sm:p-4 rounded-xl border border-border bg-surface-alt">
           <div>
             <p className="text-xs font-semibold tracking-widest uppercase text-text-muted">Concentration</p>
             <strong className="text-xl text-text">{formatNumber(calcResult.concentration_mg_per_ml, 4)} mg/mL</strong>

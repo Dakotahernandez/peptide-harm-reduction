@@ -6,7 +6,7 @@ export default function ReconGuide({ show }) {
       <div className="rounded-xl border border-border bg-surface-alt p-4">
         <p className="text-xs font-semibold tracking-widest uppercase text-text-muted mb-1">Reconstitution guide</p>
         <h3 className="font-semibold text-text mb-3">Step-by-step</h3>
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4">
           <div>
             <p className="text-xs font-semibold tracking-widest uppercase text-text-muted mb-1">Supplies</p>
             <ul className="text-sm text-text-muted list-disc pl-4 space-y-1">

@@ -16,10 +16,10 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-6xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
         <Header disclaimer={disclaimer} offlineMode={offlineMode} />
 
-        <main className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-5 items-start">
+        <main className="grid grid-cols-1 lg:grid-cols-[1.6fr_1fr] gap-4 sm:gap-5 items-start">
           <PeptideDirectoryPanel
             peptides={peptides}
             loading={loading}
@@ -35,7 +35,7 @@ export default function App() {
           </div>
         </main>
 
-        <div className="mt-6 space-y-5">
+        <div className="mt-4 sm:mt-6 space-y-4 sm:space-y-5">
           <AffiliateDisclosure />
           <SuppliesSection />
         </div>
